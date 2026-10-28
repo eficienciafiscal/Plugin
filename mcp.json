@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "eficiencia-fiscal": {
+      "type": "http",
+      "url": "https://eficiencia.app/mcp"
+    }
+  }
+}
