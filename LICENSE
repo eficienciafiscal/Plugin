@@ -1,0 +1,77 @@
+LICENÇA PROPRIETÁRIA — PLUGIN EFICIÊNCIA FISCAL PARA CLAUDE
+
+Copyright (c) 2026 Eficiência Fiscal. Todos os direitos reservados.
+
+1. ESCOPO
+
+Esta licença abrange os arquivos do plugin Eficiência Fiscal para Claude,
+incluindo manifestos, configurações, habilidades, instruções, documentação e
+recursos visuais de titularidade da Eficiência Fiscal ("Plugin"). Não abrange
+o código do servidor, os serviços contratados nem os dados acessados por ele.
+Componentes de terceiros, quando identificados, permanecem sujeitos às suas
+próprias licenças.
+
+2. USO PERMITIDO
+
+A Eficiência Fiscal concede ao usuário uma licença limitada, não exclusiva,
+intransferível e não sublicenciável para baixar, instalar e usar o Plugin,
+inclusive em sua atividade profissional, exclusivamente para acessar os
+serviços da Eficiência Fiscal por meio do Claude, com conta e permissões
+válidas. São permitidas as cópias técnicas necessárias à instalação, execução
+e cópia de segurança para esse uso.
+
+3. RESTRIÇÕES
+
+Sem autorização prévia e escrita da Eficiência Fiscal, não é permitido
+redistribuir, republicar, vender, sublicenciar ou disponibilizar o Plugin,
+integralmente ou em parte, a terceiros, inclusive em outros repositórios,
+diretórios, marketplaces ou pacotes. A restrição também se aplica a versões
+modificadas. Não é permitido remover os avisos de autoria e licença nem
+apresentar uma cópia ou adaptação como produto oficial da Eficiência Fiscal.
+
+A visibilidade pública do repositório não concede uma licença de código
+aberto. Permanecem ressalvados os direitos obrigatórios previstos em lei e
+as permissões expressamente concedidas às plataformas nos itens seguintes.
+
+4. DISTRIBUIÇÃO AUTORIZADA PELA ANTHROPIC
+
+A Anthropic está autorizada a receber, copiar, hospedar, inspecionar, testar
+e revisar as versões do Plugin submetidas pela Eficiência Fiscal, bem como
+a disponibilizá-las, distribuí-las e entregar suas atualizações pelos seus
+diretórios e produtos Claude. Essa autorização inclui as operações técnicas
+necessárias à instalação e ao uso por usuários finais sob esta licença e
+não autoriza terceiros a manter uma distribuição independente do Plugin.
+Aplicam-se também os termos de distribuição aceitos pela Eficiência Fiscal
+com a Anthropic.
+
+5. HOSPEDAGEM NO GITHUB
+
+A hospedagem e a exibição do repositório, inclusive as funcionalidades de
+visualização e fork dentro do GitHub, respeitam as permissões decorrentes
+dos termos aplicáveis dessa plataforma. Isso não concede autorização
+adicional para distribuição externa, comercialização ou uso fora do escopo
+desta licença.
+
+6. MARCAS, SERVIÇO E DADOS
+
+O nome e a logo da Eficiência Fiscal podem ser exibidos somente para
+identificar o Plugin oficial nos usos e canais autorizados. Não se concede
+direito de representar a Eficiência Fiscal ou sugerir seu endosso a outro
+produto.
+
+Esta licença não concede acesso a contas, documentos, participantes ou dados,
+nem substitui contratos, licenças de módulos, autenticação e consentimento.
+O uso do serviço continua sujeito às permissões, limites e condições
+comerciais aplicáveis. A instalação do Plugin não garante disponibilidade
+de qualquer ferramenta ou dado.
+
+7. GARANTIAS
+
+Na medida permitida pela legislação aplicável, o Plugin é fornecido no
+estado em que se encontra, sem garantias adicionais às previstas em lei
+ou em contrato específico com a Eficiência Fiscal. Esta disposição não
+afasta direitos que não possam ser excluídos por lei.
+
+8. CONTATO
+
+Pedidos de autorização e dúvidas: software@eficienciafiscal.com.br.
