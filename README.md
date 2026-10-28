@@ -36,17 +36,6 @@ O MCP entrega dados para o Claude analisar. Cálculos, comparações e sínteses
 
 Não é necessário usar uma conta de administrador para consultar os dados.
 
-## Instalação e conexão
-
-1. No Claude, abra **Personalizar → Plugins** e use a opção de importar um plugin para selecionar o ZIP fornecido pela Eficiência Fiscal.
-2. Abra o plugin instalado e inicie a conexão com o servidor MCP da Eficiência Fiscal.
-3. Na página de login da EF, entre com seu usuário e revise os participantes antes de autorizar o acesso.
-4. Volte ao Claude e peça: **“Liste os participantes autorizados na minha conexão com a Eficiência Fiscal.”**
-
-A autenticação utiliza OAuth com CIMD, permitindo que o Claude apresente sua identidade ao servidor. No fluxo do Claude web, não é necessário informar manualmente Client ID ou segredo. Digite sua senha somente na página de login da EF, nunca na conversa.
-
-Os nomes dos controles podem variar conforme a versão e o idioma do Claude. Consulte também as [instruções oficiais de instalação de plugins](https://support.claude.com/en/articles/13837440-use-plugins-in-claude).
-
 ## Exemplos de uso
 
 Substitua os campos entre colchetes por dados de um participante autorizado.
