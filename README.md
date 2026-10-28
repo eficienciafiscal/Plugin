@@ -1,6 +1,6 @@
 # Eficiência Fiscal para Claude
 
-Consulte documentos fiscais dos participantes autorizados na Eficiência Fiscal diretamente pelo Claude. O plugin reúne a conexão MCP e a habilidade `consultar-ef`, que orienta a seleção dos participantes, a consulta dos documentos e a interpretação dos dados disponíveis.
+Consulte documentos fiscais, CNDs e notificações DET/Fisconforme dos participantes autorizados na Eficiência Fiscal diretamente pelo Claude. O plugin reúne a conexão MCP e a habilidade `consultar-ef`, que orienta a seleção dos participantes, as consultas e a interpretação dos dados disponíveis. Quando habilitado, também permite preparar solicitações de contato e enviá-las após sua confirmação.
 
 **Site:** https://eficienciafiscal.com.br/  
 **Servidor MCP:** https://eficiencia.app/mcp  
@@ -16,6 +16,10 @@ Consulte documentos fiscais dos participantes autorizados na Eficiência Fiscal 
 | Itens de NF-e e NFC-e | Produtos, quantidades, unidades, valores e campos fiscais disponíveis. |
 | Pagamentos de NF-e e NFC-e | Pagamentos declarados, códigos dos meios de pagamento e respectivas descrições, quando disponíveis. |
 | Tributação | Parâmetros cadastrados de ICMS e PIS/COFINS por participante e vigência. |
+| CNDs | Certidões e consultas por esfera, nome, validade, situação e orientação disponíveis, além do arquivo original em PDF ou HTML quando autorizado. |
+| DET da SEFIN/RO | Listagem de notificações por participante e período, com código, título, datas e status. |
+| Fisconforme da SEFIN/RO | Notificações por participante e competência, com descrição, situação e detalhe disponível, incluindo inconsistência, justificativa e referências documentais. |
+| Contato com a EF | Preparação de solicitações, anexos autorizados e envio após revisão e confirmação explícita do usuário. |
 | Consumo | Uso e plano do acesso selecionado. |
 
 A disponibilidade depende das ferramentas habilitadas no servidor, das permissões da conexão e dos dados existentes. Instalar o plugin não habilita novos acessos nem garante que todos os campos estejam preenchidos.
@@ -26,6 +30,7 @@ O MCP entrega dados para o Claude analisar. Cálculos, comparações e sínteses
 
 - Conta ativa na Eficiência Fiscal, com MCP habilitado para o escritório.
 - Usuário com permissão de consulta aos participantes desejados.
+- Licenças e permissões dos módulos que deseja consultar. A autorização de um participante não libera automaticamente todos os módulos.
 - Conta Claude com suporte a plugins e conectores, conforme o plano e as políticas da organização.
 - Documentos disponíveis para os participantes e períodos consultados.
 
@@ -58,10 +63,54 @@ Substitua os campos entre colchetes por dados de um participante autorizado.
 
 > Localize a NF-e número [número], série [série], recebida pelo participante [CNPJ] em [data]. Mostre seus itens e pagamentos declarados, incluindo descontos e troco quando disponíveis.
 
+**Conferir CNDs**
+
+> Consulte as CNDs disponíveis do participante [CNPJ]. Mostre esfera, nome, situação, validade e orientação. Identifique as vencidas com base nos dados retornados.
+
+> Obtenha o arquivo da certidão [nome] que apareceu nessa consulta, no formato original disponível.
+
+**Acompanhar notificações DET**
+
+> Liste as notificações DET do participante [CNPJ] entre [data inicial] e [data final], mostrando título, data e status. Informe se existem páginas restantes.
+
+**Consultar Fisconforme**
+
+> Liste as notificações Fisconforme do participante [CNPJ] na competência [AAAA-MM]. Depois, mostre o detalhe da notificação [código], com a inconsistência e as referências disponíveis.
+
+**Preparar contato com a EF**
+
+> Prepare uma solicitação de ajuda sobre [módulo] para o participante [CNPJ], descrevendo [problema]. Mostre o conteúdo para minha revisão antes de enviar.
+
+## CNDs, DET e Fisconforme
+
+### CNDs
+
+`consultar_cnds` consulta os dados já disponíveis na EF, com classificação Federal, Estadual, Municipal e Consulta. `obter_arquivo_cnd` entrega um arquivo indicado nessa listagem, em PDF ou HTML conforme o original.
+
+A consulta não solicita emissão nem renovação de certidões. Uma certidão vencida ou uma falha de consulta ao portal não comprova dívida. Baixar um arquivo antigo não atualiza sua validade.
+
+### DET
+
+`listar_notificacoes_det` lista os dados das notificações já disponíveis na EF. O conteúdo, os PDFs e os anexos devem ser visualizados no portal da Eficiência Fiscal. A consulta MCP não registra ciência nem marca notificações como lidas.
+
+### Fisconforme
+
+`listar_fisconforme` pesquisa notificações por competência; `consultar_fisconforme` detalha uma notificação retornada pela listagem. Descrições, status, inconsistências, justificativas e dados associados são apresentados quando disponíveis.
+
+Chaves de notas citadas na notificação são referências. Consultar essas notas exige uma chamada fiscal separada, mantendo o participante autorizado e respeitando as permissões e os créditos correspondentes. A consulta não apresenta defesa, contesta nem resolve notificações.
+
+### Contato
+
+Quando as ferramentas de contato estiverem disponíveis, o Claude pode preparar um rascunho e anexar até dois prints autorizados. O participante, o motivo, a descrição e os anexos devem ser revisados e confirmados pelo usuário antes do envio. Preparar um rascunho não significa abrir um chamado.
+
+O contato não contrata módulos, não libera acesso a dados e não renova certidões. Havendo um chamado em aberto ou um intervalo de espera, o assistente deve respeitar o bloqueio e orientar o acompanhamento do atendimento existente.
+
 ## Limites e interpretação
 
 - As pesquisas usam períodos de até 31 dias e paginação. Períodos maiores exigem consultas separadas.
 - Cada página fiscal concluída consome um crédito, inclusive quando não encontra documentos. Itens e pagamentos têm paginação própria; detalhes e consultas de tributação concluídos também consomem um crédito. A medição de créditos não implica, por si só, cobrança financeira.
+- A consulta de CNDs consome um crédito; cada arquivo entregue consome mais um. Cada página de DET ou Fisconforme e cada detalhe de Fisconforme concluído consomem um crédito.
+- As chamadas são feitas para um participante autorizado por vez. Pedidos sobre vários CNPJs exigem chamadas separadas, com os resultados identificados por participante.
 - As consultas fiscais devem ser sequenciais. Ao receber uma limitação, o assistente deve respeitar o tempo de espera informado pelo servidor.
 - Dados ausentes ou pendentes não equivalem a zero. Uma resposta parcial não deve ser apresentada como resultado completo.
 - Pagamentos declarados não comprovam liquidação bancária. Impostos declarados não determinam automaticamente crédito aproveitável ou imposto a recolher.
@@ -69,7 +118,9 @@ Substitua os campos entre colchetes por dados de um participante autorizado.
 
 ## Privacidade e segurança
 
-O acesso é somente leitura. As consultas ficam restritas aos participantes autorizados para a conexão. O plugin não oferece alteração de documentos, reprocessamento, certificados, senhas ou download de XML.
+As consultas de documentos, CNDs e notificações são somente leitura e ficam restritas aos participantes autorizados para a conexão. O plugin não oferece alteração de documentos, reprocessamento, certificados digitais, senhas ou download de XML. O arquivo de uma CND pode ser entregue pela ferramenta específica quando autorizado.
+
+O fluxo de contato é uma ação separada: pode registrar um rascunho, anexos e uma solicitação à EF, com envio condicionado à confirmação explícita do usuário.
 
 As solicitações são enviadas ao servidor da Eficiência Fiscal e os dados retornados ficam disponíveis ao Claude para responder ao usuário. O tratamento desses dados segue as políticas aplicáveis da EF e da conta utilizada no Claude.
 
@@ -81,6 +132,7 @@ O pacote distribuído não deve conter credenciais, tokens ou documentos fiscais
 ## Solução de problemas
 
 - **Participante não listado:** confira as permissões do usuário e os participantes autorizados na conexão.
+- **Módulo sem licença:** quando a EF informar explicitamente essa condição, confira a disponibilidade do módulo para o participante e o escritório. Uma recusa genérica não comprova ausência de licença.
 - **Ferramenta indisponível:** a funcionalidade pode não estar habilitada no servidor. Atualizar o plugin não altera as permissões nem habilita ferramentas na EF.
 - **Itens ou detalhes pendentes:** informe a limitação e tente novamente posteriormente; a pendência não comprova ausência de dados no documento.
 - **Limite de consultas:** aguarde o tempo indicado. Não inicie chamadas paralelas para contornar a restrição.
