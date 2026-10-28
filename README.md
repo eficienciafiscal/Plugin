@@ -36,6 +36,17 @@ O MCP entrega dados para o Claude analisar. Cálculos, comparações e sínteses
 
 Não é necessário usar uma conta de administrador para consultar os dados.
 
+## Instalação e conexão
+
+1. No Claude, abra **Personalizar → Plugins** e use a opção de importar um plugin para selecionar o ZIP fornecido pela Eficiência Fiscal.
+2. Abra o plugin instalado e inicie a conexão com o servidor MCP da Eficiência Fiscal.
+3. Na página de login da EF, entre com seu usuário e revise os participantes antes de autorizar o acesso.
+4. Volte ao Claude e peça: **“Liste os participantes autorizados na minha conexão com a Eficiência Fiscal.”**
+
+A autenticação utiliza OAuth com CIMD, permitindo que o Claude apresente sua identidade ao servidor. No fluxo do Claude web, não é necessário informar manualmente Client ID ou segredo. Digite sua senha somente na página de login da EF, nunca na conversa.
+
+Os nomes dos controles podem variar conforme a versão e o idioma do Claude. Consulte também as [instruções oficiais de instalação de plugins](https://support.claude.com/en/articles/13837440-use-plugins-in-claude).
+
 ## Exemplos de uso
 
 Substitua os campos entre colchetes por dados de um participante autorizado.
@@ -111,6 +122,8 @@ As consultas de documentos, CNDs e notificações são somente leitura e ficam r
 
 O fluxo de contato é uma ação separada: pode registrar um rascunho, anexos e uma solicitação à EF, com envio condicionado à confirmação explícita do usuário.
 
+Descrições e anexos enviados em chamados são armazenados pela EF e podem permanecer por mais de 30 dias. A expiração de um token ou de um rascunho não exclui o chamado já registrado. A retenção segue a política de privacidade e as condições aplicáveis ao atendimento.
+
 As solicitações são enviadas ao servidor da Eficiência Fiscal e os dados retornados ficam disponíveis ao Claude para responder ao usuário. O tratamento desses dados segue as políticas aplicáveis da EF e da conta utilizada no Claude.
 
 - [Política de privacidade da Eficiência Fiscal](https://app.eficienciafiscal.com.br/assets/files/politica_de_privacidade.pdf)
@@ -137,6 +150,7 @@ Ao solicitar suporte, informe a ferramenta, o horário com fuso e a mensagem de 
 assets/ef-logo.svg
 skills/consultar-ef/SKILL.md
 README.md
+LICENSE
 ```
 
 O manifesto identifica o plugin, `.mcp.json` configura a conexão remota e a habilidade orienta o uso das ferramentas. Este repositório de distribuição não precisa conter o código do servidor da Eficiência Fiscal.
@@ -144,3 +158,7 @@ O manifesto identifica o plugin, `.mcp.json` configura a conexão remota e a hab
 ## Contato
 
 Desenvolvido pela **Eficiência Fiscal**. Dúvidas, suporte e relatos de problemas: [software@eficienciafiscal.com.br](mailto:software@eficienciafiscal.com.br).
+
+## Licença
+
+Este plugin utiliza uma [licença proprietária](LICENSE). É permitido instalar e usar o plugin para acessar a Eficiência Fiscal pelo Claude, conforme suas permissões. A redistribuição por terceiros depende de autorização escrita da EF; a distribuição pela Anthropic e as operações de hospedagem no GitHub têm as permissões específicas descritas na licença. O repositório público não torna o plugin software de código aberto nem concede acesso ao serviço ou aos dados da EF.
