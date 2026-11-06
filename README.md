@@ -10,11 +10,11 @@ Consulte documentos fiscais, CNDs e notificações DET/Fisconforme dos participa
 
 | Recurso | Dados disponíveis conforme a conexão e o documento |
 | --- | --- |
-| Participantes | Empresas autorizadas e regimes tributários cadastrados, com data de referência e vigência. |
+| Participantes | Participantes autorizados por CPF/CNPJ, regimes por vigência e validade/situação cadastrada do certificado, quando disponíveis. |
 | Documentos fiscais | Pesquisas separadas de NF-e, NFC-e, NFS-e, CT-e, MDF-e e NFCom, por participante, período e papel na operação. |
 | Detalhes | Identificação, partes, situação e valores retornados pelas ferramentas de cada tipo de documento. |
-| Itens de NF-e e NFC-e | Produtos, quantidades, unidades, valores e campos fiscais disponíveis. |
-| Pagamentos de NF-e e NFC-e | Pagamentos declarados, códigos dos meios de pagamento e respectivas descrições, quando disponíveis. |
+| Itens de NF-e e NFC-e | Produtos por nota ou período, quantidades, unidades, descontos, ICMS/ICMS-ST, IPI, PIS/COFINS, IBS/CBS e Imposto Seletivo, conforme os campos retornados. |
+| Pagamentos de NF-e e NFC-e | Pagamentos declarados, códigos e descrições dos meios de pagamento, número original e vencimento das duplicatas, quando disponíveis. |
 | Tributação | Parâmetros cadastrados de ICMS e PIS/COFINS por participante e vigência. |
 | CNDs | Certidões e consultas por esfera, nome, validade, situação e orientação disponíveis, além do arquivo original em PDF ou HTML quando autorizado. |
 | DET da SEFIN/RO | Listagem de notificações por participante e período, com código, título, datas e status. |
@@ -25,6 +25,10 @@ Consulte documentos fiscais, CNDs e notificações DET/Fisconforme dos participa
 A disponibilidade depende das ferramentas habilitadas no servidor, das permissões da conexão e dos dados existentes. Instalar o plugin não habilita novos acessos nem garante que todos os campos estejam preenchidos.
 
 O MCP entrega dados para o Claude analisar. Cálculos, comparações e sínteses são feitos pelo assistente a partir dos resultados, respeitando as limitações informadas.
+
+A consulta de itens por período, quando oferecida pela ferramenta, evita consultar cada nota individualmente. O assistente continua responsável por filtros de produto, cálculos e rankings. Campos tributários pendentes não equivalem a zero ou isenção. Faturas, pagamentos, duplicatas e troco têm significados distintos e não devem ser somados como recebimentos adicionais.
+
+Validade de certificado é um metadado cadastrado: não comprova funcionamento nem ausência de revogação e não permite baixar o certificado.
 
 ## Pré-requisitos
 
@@ -53,7 +57,7 @@ Substitua os campos entre colchetes por dados de um participante autorizado.
 
 **Identificar os participantes disponíveis**
 
-> Liste os participantes autorizados na minha conexão, mostrando nome e CNPJ.
+> Liste os participantes autorizados na minha conexão, mostrando nome e CPF/CNPJ, além da validade cadastrada do certificado quando disponível.
 
 **Conferir documentos recebidos**
 
@@ -107,14 +111,14 @@ O contato não contrata módulos, não libera acesso a dados e não renova certi
 
 ## Limites e interpretação
 
-- As pesquisas usam períodos de até 31 dias e paginação. Períodos maiores exigem consultas separadas.
+- Pesquisas de notas usam até 31 dias; itens por período usam até 30 dias inclusivos. Siga a paginação ou os cursores retornados. Períodos maiores exigem consultas separadas.
 - Cada página fiscal concluída consome um crédito, inclusive quando não encontra documentos. Itens e pagamentos têm paginação própria; detalhes e consultas de tributação concluídos também consomem um crédito. A medição de créditos não implica, por si só, cobrança financeira.
 - A consulta de CNDs consome um crédito; cada arquivo entregue consome mais um. Cada página de DET ou Fisconforme e cada detalhe de Fisconforme concluído consomem um crédito.
-- As chamadas são feitas para um participante autorizado por vez. Pedidos sobre vários CNPJs exigem chamadas separadas, com os resultados identificados por participante.
+- As chamadas são feitas para um participante autorizado por vez. Pedidos sobre vários CPFs/CNPJs exigem chamadas separadas, com os resultados identificados por participante.
 - As consultas fiscais devem ser sequenciais. Ao receber uma limitação, o assistente deve respeitar o tempo de espera informado pelo servidor.
 - Dados ausentes ou pendentes não equivalem a zero. Uma resposta parcial não deve ser apresentada como resultado completo.
 - Pagamentos declarados não comprovam liquidação bancária. Impostos declarados não determinam automaticamente crédito aproveitável ou imposto a recolher.
-- O CNPJ filtra os participantes já autorizados; não permite consultar qualquer empresa, suas filiais ou documentos referenciados sem autorização.
+- O CPF/CNPJ filtra os participantes já autorizados; não permite consultar qualquer empresa, suas filiais ou documentos referenciados sem autorização.
 
 ## Privacidade e segurança
 
