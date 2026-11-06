@@ -1,7 +1,7 @@
 {
   "name": "eficiencia-fiscal",
   "displayName": "Eficiência Fiscal",
-  "version": "0.1.19",
+  "version": "0.1.21",
   "homepage": "https://eficienciafiscal.com.br/",
   "icon": "./assets/ef-logo.svg",
   "description": "Consulte dados autorizados dos participantes e solicite atendimento à Eficiência Fiscal com sua confirmação.",
